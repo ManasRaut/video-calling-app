@@ -1,6 +1,9 @@
-const UserModel = require('./models/User');
+//controllers
+const controllers = require('./controllers/index.js');
 
-const bcrypt = require('bcryptjs');
+// middleware
+const middleware = require('./middleware/index.js');
+
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoSessionStorage = require('connect-mongodb-session')(session);
@@ -32,22 +35,13 @@ const sessionStorage = new MongoSessionStorage({
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(session({
 	secret: 'A Secret Key',
 	saveUninitialized: false,
 	resave: false,
 	store: sessionStorage,
 }));
-
-// --------------------Middleware-------------------------
-const isAuth = (req, res, next) => {
-	if (req.session.isAuth) {
-		next();
-	} else {
-		res.redirect('/');
-	}
-}
-// -------------------------------------------------------
 
 // -------------------render routes----------------------
 app.get('/', (req, res) => {
@@ -62,58 +56,22 @@ app.get('/signup', (req, res) => {
 	res.render('signup.ejs');
 });
 
-app.get('/home', isAuth, (req, res) => {
+app.get('/home', middleware.isAuth, (req, res) => {
 	const username = req.session.username;
 	res.render('home.ejs', {username: username});
 });
 // -------------------------------------------------------
 
 // ------------------- api routes ------------------------
-app.post('/register', async (req, res) => {
-	const {email, username, password} = req.body;
-	
-	const existingUser = await UserModel.findOne({email});
-	if (existingUser) {
-		console.log('User exists');
-		return res.redirect('/signup');
-	}
+app.post('/register', controllers.register);
 
-	const hashedPassword = await bcrypt.hash(password, 10);
-	newUser = new UserModel({
-		email,
-		username,
-		password: hashedPassword
-	});
-	await newUser.save();
-	res.redirect('/login');
-});
+app.post('/login', controllers.login);
 
-app.post('/login', async (req, res) => {
-	const {email, password} = req.body;
+app.post('/logout', controllers.logout);
 
-	const user = await UserModel.findOne({email});
-	if (!user) {
-		console.log('User does not exists');
-		return res.redirect('/login');
-	}
+app.get('/api/getContacts', middleware.isApiCallValid, controllers.getContacts);
 
-	const isPasswordCorrect = await bcrypt.compare(password, user.password);
-	if (!isPasswordCorrect)	{
-		console.log('Incorrect password');
-		return res.redirect('/login');	
-	}
-
-	req.session.isAuth = true;
-	req.session.username = user.username;
-	return res.redirect('/home');
-});
-
-app.post('/logout', async (req, res) => {
-	req.session.destroy((err) => {
-		if (err) console.log(err);
-		res.redirect('/');
-	});
-});
+app.post('/api/addNewContact', middleware.isApiCallValid, controllers.addNewContact);
 // -------------------------------------------------------
 
 server.listen(DEFAULT_PORT, () => {
