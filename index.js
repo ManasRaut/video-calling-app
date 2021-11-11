@@ -13,6 +13,10 @@ const app = express();
 // http server
 const server = require('http').createServer(app);
 
+// socket io
+const io = require("socket.io")(server);
+const connectedSockets = [];
+
 // CONSTANTS
 const DEFAULT_PORT = 5000;
 const DB_URL = 'mongodb://localhost:27017/videoCallApp';
@@ -72,7 +76,28 @@ app.post('/logout', controllers.logout);
 app.get('/api/getContacts', middleware.isApiCallValid, controllers.getContacts);
 
 app.post('/api/addNewContact', middleware.isApiCallValid, controllers.addNewContact);
+
+app.post('/api/deleteContact', middleware.isApiCallValid, controllers.removeContacts);
+
+app.post('/newCall', middleware.isApiCallValid, controllers.startNewCall);
+
+app.get("/:roomID", middleware.isApiCallValid, (req, res) => {
+	controllers.initiateRoom(req.params.roomID);
+    res.render("room.ejs", { roomID: req.params.roomID });
+});
 // -------------------------------------------------------
+
+
+// --------------------- Sockets ---------------------------
+io.on('connection', (socket) => {
+	connectedSockets.push(socket.id);
+
+	socket.on('disconnect', () => {
+		const index = connectedSockets.indexOf(socket.id);
+		connectedSockets.splice(index, 1);
+	});
+});
+// ---------------------------------------------------------
 
 server.listen(DEFAULT_PORT, () => {
 	console.log(`Server running at http://localhost:${DEFAULT_PORT}`)

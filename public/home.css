@@ -1,0 +1,193 @@
+.jumbotron {
+	display: flex;
+	justify-content: center;
+}
+.hero-cont {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex: 1;
+}
+.hero-title {
+	font-size: 24px;
+}
+.hero-img {
+	max-width: 50%;
+	flex: 1;
+}
+#join-call-modal {
+	display: none;
+}
+#new-contact-modal {
+	display: none;
+}
+.modal-cont div {
+	margin: 16px 0px;
+}
+#start-new-call-modal {
+	display: none;
+}
+.contacts-list-cont {
+	padding: 8px 16px;
+	max-width: 70%;
+	margin: 24px auto;
+}
+.cont-title {
+	font-size: 24px;
+	margin: 4px 0px;
+}
+.contacts-list {
+	margin: 4px 0px;
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	justify-items: center;
+}
+.contacts-list-item {
+	font-size: 22px;
+	background-color: #4874bf;
+	width: 150px;
+	height: 150px;
+	border-radius: 5px;
+	color: white;
+	margin: 8px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+        0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+.contacts-list-item:hover {
+	box-shadow: 7px 7px 3px -2px rgb(0 0 0 / 20%),
+	 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)
+}
+.contacts-option-btn {
+	border-radius: 2px;
+	height: 30px;
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+}
+.contacts-option-btn:hover {
+	background-color: #688ecf;
+}
+.new-contact-btn {
+	font-size: 22px;
+	background-color: #959292;
+	width: 150px;
+	height: 150px;
+	border-radius: 5px;
+	color: white;
+	margin: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+        0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+.new-contact-btn:hover {
+	box-shadow: 7px 7px 3px -2px rgb(0 0 0 / 20%),
+	 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%)
+}
+
+.newCall-contacts-list {
+	overflow-y: auto;
+}
+.newCall-contacts-item {
+	background-color: #d9d9d9;
+	padding: 8px;
+	border-radius: 2px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.newCall-contacts-item:hover {
+	background-color: darkgray;
+	cursor: pointer;
+}
+.notification-box {
+	display: none;
+	flex-direction: column;
+	position: fixed;
+	top: 60px;
+	right: 20px;
+	padding: 16px;
+	background-color: white;
+	border-radius: 2px;
+	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+        0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+.notification {
+	border-bottom: 1px solid lightgray;
+	padding: 8px 16px;
+	display: flex;
+	width: 300px;
+	justify-content: space-between;
+	cursor: pointer;
+	transition: max-height 0.5s ease;
+}
+.notification:hover {
+	background-color: #f9f9f9;
+}
+.accept-call-btn {
+	background-color: #84adf1;
+	color: white;
+	padding: 4px 8px;
+	border: none;
+	border-radius: 2px;
+}
+.accept-call-btn:hover {
+	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+        0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+.notification-top {
+	display: flex;
+	justify-content: space-between;
+}
+.close-btn {
+	cursor: pointer;
+	padding: 2px 6px;
+}
+.close-btn:hover {
+	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+        0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+}
+
+.caller-screen-modal {
+	padding: 16px;
+	background-color: white;
+	border-radius: 4px;
+	box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+        0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+    width: 40%;
+    margin: 20px auto;
+    position: fixed;
+    z-index: 1;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: callerScreenAnim 3s;
+    animation-iteration-count: infinite;
+}
+.caller-screen-controls {
+	display: flex;
+	justify-content: flex-end;
+	padding:4px 0px;
+}
+.caller-screen-title {
+	font-size: 18px;
+	padding: 8px 0px;
+}
+.caller-screen-controls button {
+	margin: 0px 4px;
+}
+
+@keyframes callerScreenAnim {
+	0% {box-shadow: box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+        0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);}
+    50% {box-shadow: 6px 10px 4px -2px rgb(0 0 0 / 30%), 
+    	0px 3px 4px 0px rgb(0 0 0 / 14%), -6px 14px 9px 0px rgb(0 0 0 / 20%);}
+    100% {box-shadow: box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%),
+        0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);}
+}

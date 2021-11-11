@@ -1,7 +1,7 @@
 const { register, login, logout } = require('./auth');
-const { getContacts, addNewContact } = require('./home');
+const { getContacts, addNewContact, startNewCall, removeContacts, initiateRoom } = require('./home');
 
 module.exports = {
 	register, login, logout,
-	getContacts, addNewContact,
+	getContacts, addNewContact, startNewCall, removeContacts, initiateRoom
 };

@@ -1,0 +1,169 @@
+html,
+body {
+    min-height: 100%;
+}
+body {
+    height: 100vh;
+}
+.top-main-cont {
+    background-color: rgb(36, 36, 36);
+    height: 90%;
+    display: flex;
+}
+.video-grid {
+    border: 1px dotted lightgray;
+    flex: 7;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-content: center;
+    justify-content: center;
+    grid-gap: 4px;
+}
+video {
+    background-color: rgb(58, 58, 58);
+    margin: 4px;
+    border-radius: 4px;
+    min-width: 0;
+    min-height: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.bottom-main-cont {
+    background-color: #4874bf;
+    padding: 16px;
+    font-size: 18px;
+    color: white;
+    height: 10%;
+    display: flex;
+}
+.call-options {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.call-controls {
+    flex: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.call-details {
+    flex: 2;
+}
+.blue-btn {
+    background-color: #789bd7;
+    height: 40px;
+    width: 50px;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    margin: 0px 8px;
+}
+.blue-btn:hover {
+    background-color: rgb(11, 55, 99);
+}
+.blue-btn:active {
+    background-color: rgb(19, 112, 204);
+}
+.rounded-btn {
+    height: 40px;
+    width: 50px;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    margin: 0px 8px;
+}
+.rounded-btn:hover {
+}
+/*sidebox*/
+.sidebox-cont {
+    flex: 2;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    margin: 16px;
+    padding: 16px;
+    min-width: 300px;
+    transition: display 1s ease;
+}
+.title {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+}
+.title span {
+    flex: 9;
+}
+.title button {
+    flex: 1;
+}
+.close-btn {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 10px;
+    border: none;
+}
+.close-btn:hover {
+    box-shadow: 2px 2px 2px 2px lightgray;
+}
+.sidebox-list {
+    height: 100%;
+    padding: 16px 0px;
+    overflow-y: auto;
+}
+.message {
+    margin: 6px 0px;
+    border-radius: 5px;
+    padding: 8px 8px;
+    border-bottom: 1px solid lightgray;
+}
+.message:hover {
+    background-color: rgb(235, 235, 235);
+}
+.sidebox-controls-cont {
+    border-top: 1px solid lightgray;
+    padding: 8px 0px;
+    display: flex;
+}
+.message-box {
+    background-color: rgb(238, 238, 238);
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    padding: 8px;
+    font-size: 14px;
+    width: 100%;
+}
+.send-btn {
+    background-color: rgb(233, 233, 233);
+    border-radius: 10px;
+    border: none;
+    height: 40px;
+    width: 50px;
+    margin: 0px 8px;
+}
+.send-btn:hover {
+    background-color: rgb(189, 189, 189);
+}
+.send-btn:active {
+    background-color: rgb(214, 214, 214);
+}
+
+.participant {
+    margin: 6px 0px;
+    border-radius: 5px;
+    padding: 8px 8px;
+}
+.participant:hover {
+    background-color: rgb(235, 235, 235);
+}
+.btn-non-active {
+    background-color: rgb(214, 36, 36);
+}
+.btn-active {
+    background-color: rgb(58, 58, 58);
+}
