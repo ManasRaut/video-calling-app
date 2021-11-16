@@ -17,6 +17,8 @@ const app = express();
 // http server
 const server = require('http').createServer(app);
 
+require('dotenv').config();
+
 // socket io
 const io = require("socket.io")(server);
 const connectedSockets = [];
