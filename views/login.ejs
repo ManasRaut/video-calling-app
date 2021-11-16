@@ -6,33 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Log In</title>
 	<link rel="stylesheet" type="text/css" href="index.css">
-	<link rel="stylesheet" type="text/css" href="login.css">
+	<link rel="stylesheet" type="text/css" href="loginSignUp.css">
 </head>
 <body>
-	<div class="root">
-		<div class="login-modal">
-			<div class="modal-title">
-				Log In
-			</div>
-			<div class="form-cont">
-				<form action="/login", method="POST">
-
-					<div class="form-grp">
-						<label>Email</label>
-						<input type="email" name="email">
-					</div>
-					<div class="form-grp">
-						<label>Passward</label>
-						<input type="password" name="password">
-					</div>
-					<button type="submit" class="highlighted-btn">Log In</button>
-				</form>		
-			</div>
-			<div class="modal-footer">
-				Don't have a account ? 
-				<a href="/signin">Sign In</a>
-			</div>
+	<div class="login-signup-modal">
+		<div class="modal-title">
+			Log In
+		</div>
+		<div class="form-cont">
+			<form action="/login", method="POST" id='login-form'>
+				<div class="form-grp">
+					<label>Email</label>
+					<input type="email" name="email" id="emailBox">
+					<div class="warning" id="email-warning">No account found with the email</div>
+				</div>
+				<div class="form-grp">
+					<label>Password</label>
+					<input type="password" name="password" id="passwordBox">
+					<div class="warning" id="password-warning">Please enter correct password</div>
+				</div>
+				<div class="form-submit">
+					<button type="button" onclick="submitForm()" class="highlighted-btn">Log In</button>
+					<a href="/" class="home-link">Cancel</a>
+				</div>
+			</form>		
+		</div>
+		<div class="modal-footer">
+			Don't have a account ? 
+			<a href="/signup">Sign In</a>
 		</div>
 	</div>
+	<script>
+		async function submitForm() {
+			const email = document.querySelector('#emailBox').value;
+			const password = document.querySelector('#passwordBox').value;
+			if (email != " " && password != " ") {
+				const emailRawResponse = await fetch(`/api/emailExists?email=${email}`);
+				const emailRes = await emailRawResponse.json();
+				if (!emailRes.success) {
+					document.querySelector("#email-warning").style.display = "block";
+					return;
+				}
+				document.querySelector('#login-form').submit();
+			} else {
+				document.querySelector("#email-warning").style.display = "block";
+				document.querySelector("#password-warning").style.display = "block";
+			}
+		}
+	</script>
 </body>
 </html>

@@ -8,8 +8,13 @@
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<link rel="stylesheet" type="text/css" href="room.css">
     <script src="https://kit.fontawesome.com/823929f852.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script>
 		const roomID = "<%= roomID %>";
+        const userID = "<%= userID %>";
+        const hostID = "<%= hostID %>";
+        const myUserName = "<%= userName %>";
 	</script>
 </head>
 <body>
@@ -28,10 +33,10 @@
 
             </div>
             <div class="sidebox-controls-cont">
-                <input type="text" placeholder="Send Message... " class="message-box">
+                <input type="text" placeholder="Send Message... " class="message-box" onkeyup = "if (event.keyCode == 13) sendMessage()">
                 <button class="send-btn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
-        </div>
+        </div> <!-- messages box -->
         <div class="sidebox-cont" id="participantsBox" style="display: none;">
             <div class="title">
                 <span>Participants</span>
@@ -42,7 +47,26 @@
             <div class="sidebox-list" id="participantsList">
                     
             </div>
-        </div>
+        </div> <!-- participants box -->
+        <div class="sidebox-cont" id="host-control-box" style="display: none;">
+            <div class="title">
+                <span>Host Settings</span>
+                <button class="close-btn" onclick="toggleMeetingControls()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="host-status">You are the host</div>
+            <div class="host-control">
+                Share meeting link: 
+                <button class="normal-btns" onclick="shareLink()">Share <i class="fa fa-share"></i></button>
+            </div>
+            <div id="waiting-box">
+                <div class="waiting-box-list">
+                    
+                </div>
+            </div>
+
+        </div> <!-- meetings control box -->
             
     </div>
     <div class="bottom-main-cont">
@@ -56,15 +80,19 @@
             <button class="rounded-btn btn-active" id="video-mute-btn" onclick="toggleMuteSelfVideo()">
                 <i class="fas fa-video"></i>
             </button>
-            <button class="rounded-btn" style="background-color: rgb(214, 36, 36);">
-                <i class="fas fa-phone-slash"></i>
-            </button>
+            <form action="/home">
+                <button type="submit" class="rounded-btn" style="background-color: rgb(214, 36, 36);">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+            </form>
         </div>
         <div class="call-options">
             <button class="blue-btn" onclick="toggleMessages()"><i class="fas fa-envelope"></i></button>
             <button class="blue-btn" onclick="toggleParticipants()"><i class="fas fa-user-friends"></i></button>
+            <button class="blue-btn" onclick="toggleMeetingControls()" style="display: none;" id="host-controls-btn"><i class="fa fa-info"></i></button>
         </div>
     </div>
+
 	<script src="room.js"></script>
 </body>
 </html>

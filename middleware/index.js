@@ -20,4 +20,12 @@ const isApiCallValid = (req, res, next) => {
 	}
 }
 
-module.exports = { isAuth, isApiCallValid };
+const isNotAuth = (req, res, next) => {
+	if (req.session.isAuth) {
+		res.redirect('/home');
+	} else {
+		next();
+	}
+}
+
+module.exports = { isAuth, isApiCallValid, isNotAuth };

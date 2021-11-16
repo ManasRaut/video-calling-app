@@ -9,20 +9,17 @@
 	<link rel="stylesheet" type="text/css" href="home.css">
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src="https://kit.fontawesome.com/823929f852.js" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
 	<script>
 		const username = "<%= username %>";
+		const userID = "<%= userID %>";
 	</script>
 </head>
-<body>
+<body style="background-color: white;">
 	<div class="navbar">
 		<div class="nav-brand">Video Call</div>
 		<div class="nav-segment">
 			<div class="nav-item">
 				<div class="nav-link">Welcome <%= username %></div>
-			</div>
-			<div class="nav-item">
-				<button class="nav-link" onclick="showModal('notification-cont')">B</button>
 			</div>
 			<div class="nav-item">
 				<div class="nav-link">
@@ -54,6 +51,10 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="footer">
+			Video Call App | Made by Manas Raut | 2021
+		</div> <!-- footer cont -->
 	</div> <!-- main-cont -->
 
 	<div class="modal" id="join-call-modal">
@@ -61,10 +62,11 @@
 			<div class="modal-title">Join a existing Call</div>
 			<input type="text" id="call-link-input" placeholder="Enter Call Link... ">
 			<div>
-				<button class="modal-submit highlighted-btn">Call</button>
+				<button class="modal-submit highlighted-btn" onclick="joinCall()">Call</button>
 				<button class="modal-submit non-highlighted-btn" onclick="closeModal('join-call-modal')">Cancel</button>
 			</div>
 		</div>
+		<form id='join-meet-form' method="GET"></form>
 	</div> <!-- Join new Call modal -->
 
 	<div class="modal" id="new-contact-modal">
@@ -91,19 +93,6 @@
 		</div>
 	</div> <!-- start new Call modal -->
 
-	<div class="notification-box" id="notification-cont">
-		<div class="notification-top">
-			<span>Notification</span>
-			<div class="close-btn" onclick="closeModal('notification-cont')">x</div>
-		</div>
-		<div class="notification" id="not1">
-			<div>
-				Manas invited you
-			</div>
-			<button class="accept-call-btn">Join group</button>
-		</div>
-	</div> <!-- notification box -->
-
 	<div class="modal" id="caller-screen-cont" style="display: none;">
 		<div class="caller-screen-modal">
 			<div class="caller-screen-title">
@@ -113,8 +102,8 @@
 				Members: Neel, Ashutosh, Avinash ...
 			</div>
 			<div class="caller-screen-controls">
-				<button class="highlighted-btn" onclick="joinCall()">Accept</button>
-				<button class="non-highlighted-btn" onclick="declineCall()">Decline</button>
+				<button class="highlighted-btn" onclick="acceptCall()">Accept</button>
+				<button class="non-highlighted-btn" onclick="closeModal('caller-screen-cont')">Decline</button>
 			</div>
 		</div>
 	</div> <!-- caller screen modal -->

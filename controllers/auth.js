@@ -8,7 +8,6 @@ const register = async (req, res) => {
 	
 	const existingUser = await UserModel.findOne({email});
 	if (existingUser) {
-		console.log('User exists');
 		return res.redirect('/signup');
 	}
 
@@ -37,11 +36,12 @@ const login = async (req, res) => {
 	const isPasswordCorrect = await bcrypt.compare(password, user.password);
 	if (!isPasswordCorrect)	{
 		console.log('Incorrect password');
-		return res.redirect('/login');	
+		return res.redirect('/login');
 	}
 
 	req.session.isAuth = true;
 	req.session.username = user.username;
+	req.session.userID = user.userID;
 	return res.redirect('/home');
 }
 
@@ -52,4 +52,32 @@ const logout = async (req, res) => {
 	});
 }
 
-module.exports = {register, login, logout};
+const checkUserExists = async (req, res) => {
+	try {
+		const username = req.query.usrnme;
+		const user = await UserModel.findOne({username});
+		if (user) {
+			return res.json({success: true});
+		} else {
+			return res.json({success: false});
+		}
+	} catch(err) {
+		console.log('Errot in checkUserExists', err);
+	}
+}
+
+const checkEmailExists = async (req, res) => {
+	try {
+		const email = req.query.email;
+		const user = await UserModel.findOne({email});
+		if (user) {
+			return res.json({success: true});
+		} else {
+			return res.json({success: false});
+		}
+	} catch(err) {
+		console.log('Errot in checkEmailExists', err);
+	}
+}
+
+module.exports = {register, login, logout, checkUserExists, checkEmailExists};

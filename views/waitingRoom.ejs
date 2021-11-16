@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Waiting to join</title>
+	<link rel="stylesheet" href="index.css">
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<style type="text/css">
+		body {
+			background-color: white;
+		}
+		.waiting-modal {
+			background: white;
+			box-shadow: 1px 4px 16px 1px rgb(0 0 0 / 20%);
+			padding: 24px;
+			border-radius: 4px;
+			display: flex;
+			flex-direction: column;
+			max-width: 40%;
+			margin: auto;
+			transform: translateY(50%);
+			align-items: center;
+		}
+		.waiting-modal * {
+			margin: 8px 0px;
+		}
+		.waiting-title {
+			font-size: 18px;
+		}
+	</style>
+	<script>
+		const roomID = "<%= roomID %>";
+		const userID = "<%= userID %>";
+		const hostID = "<%= hostID %>";
+		const userName = "<%= userName %>";
+		const hostName = "<%= hostName %>";
+	</script>
+</head>
+<body>
+	<div class="waiting-modal">
+		<div class="waiting-title">Waiting to for permission to join... </div>
+		<div>Host: <%= hostName %></div>
+		<button class="big-highlighted-btns"><a style="color: white;text-decoration: none;" href='/home'>Cancel</a></button>
+		<form action="/home" method="get">
+			<button class="non-highlighted-btn" id="go-back-form" style="display: none;">Home</button>
+		</form>
+	</div>
+	<form id="join-room-form" action="/<%= roomID %>" method="get">
+	</form>
+	<script src="waitingRoom.js"></script>
+</body>
+</html>

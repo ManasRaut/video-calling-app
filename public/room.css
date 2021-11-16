@@ -120,6 +120,7 @@ video {
     border-radius: 5px;
     padding: 8px 8px;
     border-bottom: 1px solid lightgray;
+    font-size: 14px;
 }
 .message:hover {
     background-color: rgb(235, 235, 235);
@@ -157,6 +158,17 @@ video {
     margin: 6px 0px;
     border-radius: 5px;
     padding: 8px 8px;
+    border-bottom: 1px solid lightgray;
+}
+.host-participant {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.host-participant span {
+    background-color: #ebf1fb;
+    padding: 4px 8px;
+    border-radius: 4px;
 }
 .participant:hover {
     background-color: rgb(235, 235, 235);
@@ -166,4 +178,71 @@ video {
 }
 .btn-active {
     background-color: rgb(58, 58, 58);
+}
+#host-control-box {
+    display: flex;
+}
+.host-status {
+    margin: 8px 0px 6px 0px;
+    font-size: 16px;
+    background-color: #ebf1fb;
+    padding: 8px;
+    border-radius: 4px;
+}
+.host-control {
+    margin: 6px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.normal-btns {
+    background-color: #4874bf;
+    padding: 8px 10px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+}
+.normal-btns:hover {
+    background-color: #6a93d9;
+}
+#waiting-box { 
+    margin: 4px 0px;
+    padding: 8px 0px;
+    border-top: 1px solid lightgray;
+    border-radius: 4px;
+    overflow-y: auto;
+}
+.waiting-member {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0px;
+    border-bottom: 1px solid lightgray;
+    margin: 1px 0px;
+    border-radius: 2px;
+}
+.waiting-member:hover {
+    /*background-color: #e5e5e5;*/
+}
+.waiting-accept-btn {
+    background-color: #6a93d9;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 2px 4px;
+}
+.waiting-accept-btn:hover {
+    background-color: #94afdf;
+}
+.waiting-decline-btn {
+    background-color: #bf4848;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 2px 6px;
+}
+.waiting-decline-btn:hover {
+    background-color: #d57c7c;
+}
+.waiting-member div {
+
 }

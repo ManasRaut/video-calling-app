@@ -5,7 +5,11 @@ const CallSchema = new Schema({
 	roomID : String,
 	hostID: String,
 	invitees: [String],
-	participants: [String],
+	participants: [{
+		userID: String,
+		userName: String,
+		connected: Boolean,
+	}],
 	initiated: Boolean,
 });
 

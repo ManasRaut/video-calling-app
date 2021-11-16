@@ -16,20 +16,13 @@ const startNewCall = async (req, res) => {
 		initiated: false,
 	});
 	await newRoom.save();
+
 	res.json({
 		success: true,
 		roomID: roomID,
 		hostID: hostID,
 		msg: 'room started',
 	});
-}
-
-const initiateRoom = async (roomID) => {
-	const room = await CallModel.findOne({roomID});
-	if (room) {
-		room.initiated = true;
-		await room.save();
-	}
 }
 
 const getContacts = async (req, res) => {
@@ -85,7 +78,15 @@ const addNewContact = async (req, res) => {
 }
 
 const removeContacts = async (req, res) => {
-	res.send("aef")
+	const contactUserID = req.body.userID;
+	const userID = req.session.userID;
+	const user = await UserModel.findOne({userID});
+	if (user) {
+		user.contacts = user.contacts.filter((c) => c.userID != contactUserID);
+		await user.save();
+		return res.json({success: true, contacts: user.contacts});
+	}
+	return res.json({success: false, msg: 'no such user exists'});
 }
 
-module.exports = { getContacts, addNewContact, startNewCall, removeContacts, initiateRoom };
+module.exports = { getContacts, addNewContact, startNewCall, removeContacts };

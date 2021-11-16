@@ -1,18 +1,112 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Log In</title>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sign Up</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" type="text/css" href="loginSignUp.css">
 </head>
 <body>
-	<form action="/register", method="POST">
-		<label>UserName</label>
-		<input type="text" name="username">
-		<label>Email</label>
-		<input type="email" name="email">
-		<label>Password</label>
-		<input type="password" name="password">
-		<button type="submit">Sign Up</button>
-	</form>
+	<div class="login-signup-modal">
+		<div class="modal-title">
+			Sign Up
+		</div>
+		<div class="form-cont">
+			<form action="/register", method="POST" id='signup-form'>
+				<div class="form-grp">
+					<label>Username</label>
+					<input type="text" id='usernameBox' name="username" onfocusout="checkUserExists()">
+					<div class="warning" id="username-warning">Username unavailable</div>
+				</div>
+				<div class="form-grp">
+					<label>Email</label>
+					<input type="email" name="email" id="emailBox">
+					<div class="warning" id="email-warning">Account already exists</div>
+				</div>
+				<div class="form-grp">
+					<label>Password</label>
+					<input type="password" name="password" id="passwordBox">
+					<div class="warning" id="password-warning">Please enter a valid password</div>
+				</div>
+				<div class="form-submit">
+					<button type="button" onclick="submitForm()" class="highlighted-btn" id='form-submit-btn'>Sign Up</button>
+					<a href="/" class="home-link">Cancel</a>
+				</div>
+				<div class="modal-footer">
+						Already have a account ? 
+						<a href="/login">Log In</a>
+				</div>
+			</form>
+		</div>
+	</div>
+		<script>
+		const emailBox = document.querySelector('#emailBox');
+		const userNameBox = document.querySelector('#usernameBox');
+		const submitBtn = document.querySelector('#form-submit-btn');
+		const form = document.querySelector('#signup-form');
+
+		async function checkUserExists() {
+			const value = userNameBox.value;
+			if (value && value != "") {
+				const rawResponse = await fetch(`/api/userExists?usrnme=${value}`);
+				const res = await rawResponse.json();
+				if (res.success) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		async function checkEmailExists() {
+			const email = emailBox.value;
+			if (email && email != "") {
+				const rawResponse = await fetch(`/api/emailExists?email=${email}`);
+				const res = await rawResponse.json();
+				if (res.success) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		async function submitForm() {
+			let allOk = true;
+			
+			if (await checkUserExists()) {
+				document.querySelector('#username-warning').style.display = "block";
+				allOk = allOk && false;
+			} else {
+				document.querySelector('#username-warning').style.display = "none";
+				allOk = allOk && true;
+			}
+
+			if (await checkEmailExists()) {
+				document.querySelector('#email-warning').style.display = "block";
+				allOk = allOk && false;
+			} else {
+				document.querySelector('#email-warning').style.display = "none";
+				allOk = allOk && true;
+			}
+
+			const ps = document.querySelector('#passwordBox').value
+			if (ps && ps != "") {
+				document.querySelector('#password-warning').style.display = "none";
+				allOk = allOk && true;
+			} else {
+				document.querySelector('#password-warning').style.display = "block";
+				allOk = allOk && false;
+			}
+
+			if (allOk) {
+				form.submit();
+			}
+		}
+	</script>
 </body>
 </html>
