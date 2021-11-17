@@ -47,7 +47,7 @@ const socket = io("/")
 let peer = new Peer(myData.userID, {
     host: "/",  
     path: "/peerjs",
-    port: process.env.PORT || 5000,
+    port: window.location.port,
 });
 
 // get media streams and setup sockets after window is loaded
