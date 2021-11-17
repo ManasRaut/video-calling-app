@@ -86,13 +86,13 @@ async function call() {
 
 // to close Modal
 function closeModal(id) {
-	const modal = document.querySelector(`#${id}`);
+	const modal = document.getElementById(`${id}`);
 	modal.style.display = "none";
 }
 
 // show modal
 function showModal(id) {
-	const modal = document.querySelector(`#${id}`);
+	const modal = document.getElementById(`${id}`);
 	modal.style.display = "flex";
 }
 

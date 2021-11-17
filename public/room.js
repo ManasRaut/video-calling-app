@@ -111,7 +111,7 @@ async function start() {
     });
 
     socket.on('video-stream-changed', (streamData) => {
-        const videoElement = document.querySelector(`#${streamData.userID}`);
+        const videoElement = document.getElementById(`${streamData.userID}`);
         if (videoElement) {
             console.log(streamData);
         }
@@ -153,7 +153,7 @@ function acceptWaitingPerson(userID) {
     const data = permissions.find((p) => p.userID === userID);
     console.log(data)
     socket.emit('accept-person', data);
-    const item = document.querySelector(`#${userID}`);
+    const item = document.getElementById(`${userID}`);
     item.remove();
 }
 
@@ -161,7 +161,7 @@ function declineWaitingPerson(userID) {
     const data = permissions.find((p) => p.userID === userID);
     console.log(data)
     socket.emit('decline-person', data);
-    const item = document.querySelector(`#${userID}`);
+    const item = document.getElementById(`${userID}`);
     item.remove();
 }
 
@@ -276,7 +276,7 @@ function addNewVideo(stream, videoElement, userID, muted = false) {
 
 // remove video from video grid
 function removeVideo({userID}) {
-    const videoElement = document.querySelector(`#${userID}`);
+    const videoElement = document.getElementById(`${userID}`);
     if (videoElement) {
         videoElement.remove();
         videosVisible--;
