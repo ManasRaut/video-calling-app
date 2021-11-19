@@ -33,7 +33,7 @@ app.use('/peerjs', peerServer);
 // CONSTANTS
 const DEFAULT_PORT = 5000;
 // const DB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/videoCallApp';
-const DB_URL = process.env.MONGODB_URI || process.env.DATABSASE_URL;
+const DB_URL = process.env.MONGODB_URI || process.env.DATABASE_URL;
 
 // connect to Database
 mongoose.connect(DB_URL, {
