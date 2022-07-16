@@ -33,7 +33,7 @@ const getContacts = async (req, res) => {
 		const contacts = user.contacts;
 		res.status(200).json({
 			success: true,
-			contacts: user.contacts ?? [],
+			contacts: user.contacts ? user.contacts : [],
 			msg: 'Successfully fetched contacts!'
 		});
 	} else {
@@ -60,7 +60,7 @@ const addNewContact = async (req, res) => {
 			user = await user.save();
 			res.status(200).json({
 				success: true,
-				contacts: user.contacts ?? [],
+				contacts: user.contacts ? user.contacts : [],
 				msg: 'Successfully added contact!'
 			});
 		} else {
