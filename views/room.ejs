@@ -19,6 +19,14 @@
 </head>
 <body>
 	<div class="top-main-cont">
+        <div class="top-bar">
+            <div class="topbar-calldetails">
+                Video Call App
+            </div>
+            <div class="call-options">
+                <button class="blue-btn" id="topbar-participants-btn" onclick="toggleParticipants()"><i class="fas fa-user-friends"></i></button>
+            </div>
+        </div> <!-- Top bar: only visible in mobile devices(width <= 600px) -->
 		<div class="video-grid">
 			
 		</div>
@@ -88,7 +96,7 @@
         </div>
         <div class="call-options">
             <button class="blue-btn" onclick="toggleMessages()"><i class="fas fa-envelope"></i></button>
-            <button class="blue-btn" onclick="toggleParticipants()"><i class="fas fa-user-friends"></i></button>
+            <button class="blue-btn" id="bottombar-participants-btn" onclick="toggleParticipants()"><i class="fas fa-user-friends"></i></button>
             <button class="blue-btn" onclick="toggleMeetingControls()" style="display: none;" id="host-controls-btn"><i class="fa fa-info"></i></button>
         </div>
     </div>
